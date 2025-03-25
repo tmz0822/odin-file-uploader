@@ -25,7 +25,7 @@ app.use(
     secret: 'secret',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 }, // 1 hour
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
     store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000,
       dbRecordIdIsSessionId: true,
@@ -37,6 +37,11 @@ app.use(
 // Passport
 require('./config/passport');
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Routes
 app.use('/', indexRouter);

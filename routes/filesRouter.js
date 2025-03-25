@@ -3,8 +3,8 @@ const { Router } = require('express');
 const filesRouter = Router();
 
 const filesController = require('../controllers/filesController');
+const { isAuthenticated } = require('../middlewares/authMiddleware');
 
-// Upload file
-filesRouter.post('/', filesController.uploadFile);
+filesRouter.post('/', isAuthenticated, filesController.uploadFile); // Upload file
 
 module.exports = filesRouter;

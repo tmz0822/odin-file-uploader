@@ -6,6 +6,12 @@
     <title>Sign up now</title>
   </head>
   <body>
+    <% if(user !== null) { %>
+    <form action="/signout" method="post">
+      <button>Sign out</button>
+    </form>
+    <% } %>
+
     <h1>Upload files</h1>
     <form action="/files" method="post" enctype="multipart/form-data">
       <input type="file" name="file" />
