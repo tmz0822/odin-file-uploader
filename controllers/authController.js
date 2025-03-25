@@ -14,4 +14,16 @@ async function signUp(req, res) {
   }
 }
 
-module.exports = { signUp };
+async function signIn(req, res) {
+  res.redirect('/');
+}
+
+async function signOut(req, res) {
+  req.logout((err) => {
+    if (err) return next(err);
+
+    res.redirect('/');
+  });
+}
+
+module.exports = { signUp, signIn, signOut };
