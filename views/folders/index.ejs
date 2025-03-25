@@ -1,0 +1,13 @@
+<h1>Your folders</h1>
+<div class="folders-container">
+  <form action="/folders" method="post">
+    <label for="folderName">Folder Name: </label>
+    <input type="text" name="folderName" id="folderName" />
+    <button>Add</button>
+  </form>
+  <ul class="folders-list">
+    <% folders.forEach((folder) => { %>
+    <li><a href="/folders/<%= folder.name %>"><%= folder.name %></a></li>
+    <% }) %>
+  </ul>
+</div>
