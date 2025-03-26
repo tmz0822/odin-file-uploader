@@ -1,7 +1,5 @@
 const prisma = require('./prisma');
 
-// TODO: CRUD folders
-
 async function createFolder(userId, folder, parentId = null) {
   const createdFolder = await prisma.folder.create({
     data: {
@@ -39,6 +37,7 @@ async function getUserFolder(userId, folderId) {
     },
     include: {
       subfolders: true,
+      files: true,
     },
   });
 

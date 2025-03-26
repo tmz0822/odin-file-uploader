@@ -3,7 +3,7 @@
 <h1>Your folders</h1>
 <div class="folders-container">
   <!-- Add Folder Form -->
-  <%- include('add-folder-form.ejs', {folder}) %>
+  <%- include('add-folder-form.ejs', { folder }) %>
 
   <!-- Edit Folder Modal -->
   <%- include('edit-folder-form.ejs') %>
@@ -13,6 +13,7 @@
 
   <!-- Folder List -->
   <ul class="folders-list">
+    <h1>Folder List</h1>
     <% if(folders.length === 0) {%>
     <div><strong>This folder is empty!</strong></div>
     <% } %> <% folders.forEach((folder) => { %>
@@ -30,6 +31,7 @@
     </li>
     <% }) %>
   </ul>
+  <%- include('../files/files-list.ejs', { files }) %>
 </div>
 <script src="/js/editFolderModal.js"></script>
 

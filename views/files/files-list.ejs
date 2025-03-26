@@ -1,0 +1,8 @@
+<% if(files.length > 0) { %>
+<ul>
+  <h1>Files list</h1>
+  <% files.forEach(file => {%>
+  <li><%= file.name%></li>
+  <%}) %>
+</ul>
+<% } %>

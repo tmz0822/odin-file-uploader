@@ -1,13 +1,14 @@
 // TODO: CRUD folders
 
-const db = require('../db/foldersQueries');
+const foldersQueries = require('../db/foldersQueries');
+const filesQueries = require('../db/filesQueries');
 
 async function createFolder(req, res) {
   try {
     const { name } = req.body;
     const { parentId } = req.params;
 
-    await db.createFolder(req.user.id, { name }, parentId);
+    await foldersQueries.createFolder(req.user.id, { name }, parentId);
 
     res.redirect(req.get('referer'));
   } catch (error) {
@@ -18,9 +19,12 @@ async function createFolder(req, res) {
 
 async function getUserRootFolder(req, res) {
   try {
-    const folders = await db.getUserRootFolder(req.user.id);
+    const userId = req.user.id;
+    const folders = await foldersQueries.getUserRootFolder(userId);
+    const files = await filesQueries.getRootFolderFiles(userId);
 
-    res.render('folders/index.ejs', { folders, folder: null });
+    // folder: null because root folder is not added into database(confusing)
+    res.render('folders/index.ejs', { folders, folder: null, files });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to get folders' });
@@ -31,11 +35,12 @@ async function getUserFolder(req, res) {
   try {
     const folderId = req.params.id;
     const userId = req.user.id;
-    const folder = await db.getUserFolder(userId, folderId);
+    const folder = await foldersQueries.getUserFolder(userId, folderId);
 
     res.render('folders/index.ejs', {
       folder: folder,
       folders: folder.subfolders,
+      files: folder.files,
     });
   } catch (error) {
     console.error(error);
@@ -49,7 +54,7 @@ async function updateUserFolder(req, res) {
     const userId = req.user.id;
     const { name } = req.body;
 
-    await db.updateUserFolder(folderId, userId, { name });
+    await foldersQueries.updateUserFolder(folderId, userId, { name });
 
     // Redirect back to current page
     res.redirect(req.get('referer'));
@@ -68,7 +73,7 @@ async function deleteUserFolder(req, res) {
       return res.status(400).json({ error: 'Folder ID is required' });
     }
 
-    await db.deleteUserFolder(folderId, userId);
+    await foldersQueries.deleteUserFolder(folderId, userId);
 
     res.redirect(req.get('referer'));
   } catch (error) {

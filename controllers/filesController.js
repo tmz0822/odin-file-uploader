@@ -13,8 +13,8 @@ const uploadFile = [
       size: req.file.size,
     };
     const folderId = req.params.folderId;
-    console.log(folderId);
-    await db.addFileToFolder(file, folderId);
+    const userId = req.user.id;
+    await db.addFile(file, userId, folderId);
 
     res.redirect(req.get('referer'));
   },
