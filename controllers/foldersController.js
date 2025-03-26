@@ -63,7 +63,6 @@ async function updateUserFolder(req, res) {
 async function deleteUserFolder(req, res) {
   try {
     const folderId = req.params.id;
-    const userId = req.user.id;
 
     await db.deleteUserFolder(folderId, userId);
     res.redirect(req.get('referer'));
