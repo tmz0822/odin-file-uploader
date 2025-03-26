@@ -5,8 +5,9 @@ const db = require('../db/foldersQueries');
 async function createFolder(req, res) {
   try {
     const { name } = req.body;
+    const { parentId } = req.params;
 
-    await db.createFolder(req.user.id, { name });
+    await db.createFolder(req.user.id, { name }, parentId);
 
     res.redirect('/folders');
   } catch (error) {
@@ -15,24 +16,54 @@ async function createFolder(req, res) {
   }
 }
 
-async function getUserFolders(req, res) {
+async function getUserRootFolder(req, res) {
   try {
-    const folders = await db.getUserFolders();
+    const folders = await db.getUserRootFolder(req.user.id);
     console.log(folders);
-    res.render('folders/index.ejs', { folders });
+
+    res.render('folders/index.ejs', { folders, folder: null });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to get folders' });
   }
 }
 
-async function updateUserFolder(req, res) {}
+async function getUserFolder(req, res) {
+  try {
+    const folderId = req.params.id;
+    const userId = req.user.id;
+    const folder = await db.getUserFolder(userId, folderId);
+
+    res.render('folders/index.ejs', {
+      folder: folder,
+      folders: folder.subfolders,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to get folder' });
+  }
+}
+
+async function updateUserFolder(req, res) {
+  try {
+    const folderId = req.params.id;
+    const userId = req.user.id;
+    const { name } = req.body;
+
+    await db.updateUserFolder(folderId, userId, { name });
+    res.redirect('/folders');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to update folder' });
+  }
+}
 
 async function deleteUserFolder(req, res) {}
 
 module.exports = {
   createFolder,
-  getUserFolders,
+  getUserRootFolder,
+  getUserFolder,
   updateUserFolder,
   deleteUserFolder,
 };

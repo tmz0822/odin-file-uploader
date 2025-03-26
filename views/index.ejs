@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign up now</title>
-  </head>
-  <body>
-    <% if(user !== null) { %>
-    <form action="/signout" method="post">
-      <button>Sign out</button>
-    </form>
-    <% } %>
+<%- include('./partials/header.ejs') %> <% if(user !== null) { %>
+<form action="/signout" method="post">
+  <button>Sign out</button>
+</form>
+<% } %>
 
-    <h1>Upload files</h1>
-    <form action="/files" method="post" enctype="multipart/form-data">
-      <input type="file" name="file" />
-      <button>Upload</button>
-    </form>
-  </body>
-</html>
+<h1>Upload files</h1>
+<form action="/files" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" />
+  <button>Upload</button>
+</form>
+
+<%- include('./partials/footer.ejs') %>

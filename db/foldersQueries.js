@@ -14,24 +14,41 @@ async function createFolder(userId, folder, parentId = null) {
   return createdFolder;
 }
 
-async function getUserFolders(userId) {
-  const folders = await prisma.folder.findMany({
+async function getUserRootFolder(userId) {
+  const rootFolder = await prisma.folder.findMany({
     where: {
       userId: userId,
+      parentId: null,
     },
+  });
+  return rootFolder;
+}
 
+async function getUserFolder(userId, folderId) {
+  const folder = await prisma.folder.findUnique({
+    where: {
+      id: folderId,
+      userId: userId,
+    },
     include: {
-      user: true,
-      parent: true,
+      subfolders: true,
     },
   });
 
-  console.log(folders);
-
-  return folders;
+  return folder;
 }
 
-async function updateUserFolder(folderId) {}
+async function updateUserFolder(folderId, userId, folder) {
+  await prisma.folder.update({
+    data: {
+      name: folder.name,
+    },
+    where: {
+      id: folderId,
+      userId: userId,
+    },
+  });
+}
 
 async function deleteUserFolder(folderId, userId) {
   await prisma.folder.delete({
@@ -44,7 +61,8 @@ async function deleteUserFolder(folderId, userId) {
 
 module.exports = {
   createFolder,
-  getUserFolders,
+  getUserRootFolder,
   updateUserFolder,
   deleteUserFolder,
+  getUserFolder,
 };
