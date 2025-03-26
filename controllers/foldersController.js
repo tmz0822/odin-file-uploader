@@ -9,7 +9,7 @@ async function createFolder(req, res) {
 
     await db.createFolder(req.user.id, { name }, parentId);
 
-    res.redirect('/folders');
+    res.redirect(req.get('referer'));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create folder' });
@@ -51,14 +51,27 @@ async function updateUserFolder(req, res) {
     const { name } = req.body;
 
     await db.updateUserFolder(folderId, userId, { name });
-    res.redirect('/folders');
+
+    // Redirect back to current page
+    res.redirect(req.get('referer'));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to update folder' });
   }
 }
 
-async function deleteUserFolder(req, res) {}
+async function deleteUserFolder(req, res) {
+  try {
+    const folderId = req.params.id;
+    const userId = req.user.id;
+
+    await db.deleteUserFolder(folderId, userId);
+    res.redirect(req.get('referer'));
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to delete folder' });
+  }
+}
 
 module.exports = {
   createFolder,

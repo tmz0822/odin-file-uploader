@@ -34,10 +34,12 @@
       >
         Edit
       </button>
-      <button>Delete</button>
+      <form action="/folders/<%= folder.id %>/delete" method="post">
+        <button>Delete</button>
+      </form>
     </li>
     <% }) %>
   </ul>
 </div>
-<script src="js/editFolderModal.js"></script>
+<script src="/js/editFolderModal.js"></script>
 <%- include('../partials/footer.ejs') %>
