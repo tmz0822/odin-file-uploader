@@ -2,29 +2,19 @@
 
 <h1>Your folders</h1>
 <div class="folders-container">
-  <% if(folder) { %>
-  <form action="/folders/<%=folder.id%>" method="post">
-    <label for="name">Folder Name: </label>
-    <input type="text" name="name" id="name" />
-    <button>Add</button>
-  </form>
-  <% } else {%>
-  <!-- Form for root folder -->
-  <form action="/folders/" method="post">
-    <label for="name">Folder Name: </label>
-    <input type="text" name="name" id="name" />
-    <button>Add</button>
-  </form>
-  <% } %>
+  <!-- Add Folder Form -->
+  <%- include('add-folder-form.ejs', {folder}) %>
 
   <!-- Edit Folder Modal -->
   <%- include('edit-folder-form.ejs') %>
+
+  <!-- Upload Files Form -->
+  <%- include('../files/upload-file-form.ejs', { folder }) %>
 
   <!-- Folder List -->
   <ul class="folders-list">
     <% if(folders.length === 0) {%>
     <div><strong>This folder is empty!</strong></div>
-
     <% } %> <% folders.forEach((folder) => { %>
     <li>
       <span><a href="/folders/<%= folder.id %>"><%= folder.name %></a></span>
@@ -42,4 +32,5 @@
   </ul>
 </div>
 <script src="/js/editFolderModal.js"></script>
+
 <%- include('../partials/footer.ejs') %>

@@ -8,8 +8,4 @@ function isAuthenticated(req, res, next) {
   }
 }
 
-function verifyUser(req, res, next) {
-  next();
-}
-
-module.exports = { isAuthenticated, verifyUser };
+module.exports = { isAuthenticated };

@@ -19,7 +19,6 @@ async function createFolder(req, res) {
 async function getUserRootFolder(req, res) {
   try {
     const folders = await db.getUserRootFolder(req.user.id);
-    console.log(folders);
 
     res.render('folders/index.ejs', { folders, folder: null });
   } catch (error) {

@@ -5,6 +5,9 @@ const filesRouter = Router();
 const filesController = require('../controllers/filesController');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 
-filesRouter.post('/', isAuthenticated, filesController.uploadFile); // Upload file
+filesRouter.use(isAuthenticated);
+
+filesRouter.post('/', filesController.uploadFile); // Upload file
+filesRouter.post('/:folderId', filesController.uploadFile);
 
 module.exports = filesRouter;
