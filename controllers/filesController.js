@@ -20,4 +20,11 @@ const uploadFile = [
   },
 ];
 
-module.exports = { uploadFile };
+// TODO
+function getFileDetails() {
+  // show a webpage of the file details
+}
+
+function deleteFile() {}
+
+module.exports = { uploadFile, getFileDetails, deleteFile };
