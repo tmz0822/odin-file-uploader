@@ -63,11 +63,19 @@ async function updateUserFolder(req, res) {
 async function deleteUserFolder(req, res) {
   try {
     const folderId = req.params.id;
+    const userId = req.user.id;
+
+    if (!folderId) {
+      return res.status(400).json({ error: 'Folder ID is required' });
+    }
 
     await db.deleteUserFolder(folderId, userId);
+
     res.redirect(req.get('referer'));
   } catch (error) {
-    console.error(error);
+    if ((error.message = 'Folder not found or unauthorized')) {
+      return res.status(404).json({ error: error.message });
+    }
     res.status(500).json({ error: 'Failed to delete folder' });
   }
 }

@@ -20,6 +20,13 @@ async function getUserRootFolder(userId) {
       userId: userId,
       parentId: null,
     },
+    include: {
+      user: {
+        select: {
+          username: true,
+        },
+      },
+    },
   });
   return rootFolder;
 }
@@ -51,12 +58,19 @@ async function updateUserFolder(folderId, userId, folder) {
 }
 
 async function deleteUserFolder(folderId, userId) {
-  await prisma.folder.delete({
-    where: {
-      id: folderId,
-      userId: userId,
-    },
-  });
+  try {
+    return await prisma.folder.delete({
+      where: {
+        id: folderId,
+        userId: userId,
+      },
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      throw new Error('Folder not found or unauthorized');
+    }
+    throw new Error('Database error');
+  }
 }
 
 module.exports = {
