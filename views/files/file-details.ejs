@@ -1,0 +1,15 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="file-details-container">
+  <a href="<%= referer %>">Back</a>
+
+  <div>Name: <%= file.name %></div>
+  <div>Size: <%= file.size %></div>
+  <div>Upload time: <%= file.uploadTime %></div>
+
+  <a href="/files/<%= file.id %>/download">
+    <button>Download</button>
+  </a>
+</div>
+
+<%- include('../partials/footer.ejs') %>

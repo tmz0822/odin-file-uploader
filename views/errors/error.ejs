@@ -1,0 +1,14 @@
+<%- include('../partials/header.ejs', {css: '/css/error.css'}) %>
+
+<!-- statusCode, title, message  -->
+<div class="error-container">
+  <a href="/folders">Back to folder</a>
+
+  <div class="details">
+    <!-- <h1><%= error.statusCode %> <%= error.title %></h1> -->
+
+    <p><%= error.message %></p>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

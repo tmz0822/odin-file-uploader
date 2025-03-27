@@ -1,8 +1,18 @@
 <% if(files.length > 0) { %>
-<ul>
-  <h1>Files list</h1>
+<ul class="files-list">
   <% files.forEach(file => {%>
-  <li><%= file.name%></li>
+
+  <li class="files-list-item">
+    <div class="left-side">
+      <img src="/icons/file-solid.svg" alt="File" />
+      <span><%= file.name%></span>
+    </div>
+
+    <a href="/files/<%= file.id %>" class="button">View</a>
+    <form action="/files/<%= file.id %>/delete" method="post">
+      <button>Delete</button>
+    </form>
+  </li>
   <%}) %>
 </ul>
 <% } %>

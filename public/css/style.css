@@ -94,12 +94,17 @@ a {
   color: #bb86fc;
 }
 
-button {
+button,
+a.button {
   background-color: #333;
   color: white;
   border: none;
   padding: 8px 12px;
   cursor: pointer;
+}
+
+a.button {
+  text-decoration: none;
 }
 
 button:hover {
@@ -189,6 +194,7 @@ header {
   justify-content: space-between;
 
   padding: 1rem 0;
+  padding-right: 4rem;
   gap: 2rem;
 }
 
@@ -247,6 +253,11 @@ header .nav-list {
   width: 20px;
 }
 
+.folders-list-item button {
+  width: 70px;
+  text-align: center;
+}
+
 /* Add folder form */
 .add-folder-form,
 .add-folder-form .form-field {
@@ -270,4 +281,39 @@ header .nav-list {
 
 .upload-file-form button {
   padding: 5px 10px;
+}
+
+/* Files list */
+.files-list {
+  list-style: none;
+  padding: 0;
+}
+
+.files-list-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.files-list-item .left-side {
+  flex: 1;
+
+  display: flex;
+  gap: 1rem;
+}
+
+.files-list-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.files-list img {
+  width: 18px;
+  fill: #fff;
+}
+
+.files-list-item a.button,
+.files-list-item button {
+  width: 70px;
+  text-align: center;
 }
