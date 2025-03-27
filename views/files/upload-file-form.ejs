@@ -1,17 +1,27 @@
 <% if(folder === null) { %>
 <!-- Form for root folder -->
-<form action="/files" method="post" enctype="multipart/form-data">
-  <input type="file" name="file" />
+<form
+  class="upload-file-form"
+  action="/files"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <div class="form-field">
+    <input type="file" name="file" />
+  </div>
   <button>Upload</button>
 </form>
 <% } else { %>
 <!-- Form for subfolders -->
 <form
+  class="upload-file-form"
   action="/files/<%= folder.id %>"
   method="post"
   enctype="multipart/form-data"
 >
-  <input type="file" name="file" />
+  <div class="form-field">
+    <input type="file" name="file" />
+  </div>
   <button>Upload</button>
 </form>
 <% } %>

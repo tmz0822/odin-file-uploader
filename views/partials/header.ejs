@@ -4,7 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <% if(user !== null) { %>
+  <header>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-list-item"><a href="/folders">Folders</a></li>
+      </ul>
+    </nav>
+
+    <form action="/signout" method="post">
+      <button>Sign out</button>
+    </form>
+  </header>
+  <% } %>
+
+  <main class="container">
+
   

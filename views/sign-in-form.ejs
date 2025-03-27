@@ -1,19 +1,23 @@
 <%- include('./partials/header.ejs') %>
 
-<form class="sign-in-form" action="/signin" method="post">
-  <h1 class="title">Sign In</h1>
+<div class="sign-in-container">
+  <form class="sign-in-form" action="/signin" method="post">
+    <h1 class="title">Sign In</h1>
 
-  <div class="form-field">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" />
-  </div>
+    <div class="form-field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" />
+    </div>
 
-  <div class="form-field">
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" />
-  </div>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" />
+    </div>
 
-  <button>Sign in</button>
-</form>
+    <a href="/signup">Create an account</a>
+
+    <button>Sign in</button>
+  </form>
+</div>
 
 <%- include('./partials/footer.ejs') %>

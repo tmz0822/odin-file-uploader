@@ -1,15 +1,19 @@
 <% if(folder) { %>
 <!-- Form for sub folders -->
-<form action="/folders/<%=folder.id%>" method="post">
-  <label for="name">Folder Name: </label>
-  <input type="text" name="name" id="name" />
+<form class="add-folder-form" action="/folders/<%=folder.id%>" method="post">
+  <div class="form-field">
+    <label for="name">Folder Name: </label>
+    <input type="text" name="name" id="name" />
+  </div>
   <button>Add</button>
 </form>
 <% } else {%>
 <!-- Form for root folder -->
-<form action="/folders/" method="post">
-  <label for="name">Folder Name: </label>
-  <input type="text" name="name" id="name" />
+<form class="add-folder-form" action="/folders/" method="post">
+  <div class="form-field">
+    <label for="name">Folder Name: </label>
+    <input type="text" name="name" id="name" />
+  </div>
   <button>Add</button>
 </form>
 <% } %>

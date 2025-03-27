@@ -2,23 +2,27 @@
 
 <h1>Your folders</h1>
 <div class="folders-container">
-  <!-- Add Folder Form -->
-  <%- include('add-folder-form.ejs', { folder }) %>
-
   <!-- Edit Folder Modal -->
   <%- include('edit-folder-form.ejs') %>
 
-  <!-- Upload Files Form -->
-  <%- include('../files/upload-file-form.ejs', { folder }) %>
+  <div class="folders-actions">
+    <!-- Add Folder Form -->
+    <%- include('add-folder-form.ejs', { folder }) %>
+
+    <!-- Upload Files Form -->
+    <%- include('../files/upload-file-form.ejs', { folder }) %>
+  </div>
 
   <!-- Folder List -->
   <ul class="folders-list">
-    <h1>Folder List</h1>
     <% if(folders.length === 0) {%>
     <div><strong>This folder is empty!</strong></div>
     <% } %> <% folders.forEach((folder) => { %>
-    <li>
-      <span><a href="/folders/<%= folder.id %>"><%= folder.name %></a></span>
+    <li class="folders-list-item">
+      <div class="left">
+        <img class="folder-icon" src="/icons/folder.png" alt="Folder" />
+        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+      </div>
       <button
         id="openEditFolderModalBtn"
         data-folder="<%= JSON.stringify(folder)%>"

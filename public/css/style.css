@@ -75,13 +75,19 @@ h6 {
 }
 
 /* General Styling */
+html,
 body {
-  color: #ffffff;
-  background-color: #121212;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: #fff;
+  background-color: #222;
   font-family: Arial, sans-serif;
-  min-height: 100vh;
 
   display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -100,7 +106,17 @@ button:hover {
   background-color: #444;
 }
 
+/* Main container */
+.container {
+  flex: 1;
+}
+
 /* Sign in form */
+.sign-in-container {
+  height: 100%;
+  align-content: center;
+}
+
 .sign-in-form {
   margin: 0 auto;
   max-width: 500px;
@@ -111,7 +127,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-self: center;
 }
 
 .sign-in-form .title {
@@ -130,4 +145,129 @@ button:hover {
 
 .sign-in-form .form-field input {
   flex: 1;
+}
+
+/* Sign-up form */
+.sign-up-container {
+  height: 100%;
+  align-content: center;
+}
+
+.sign-up-form {
+  margin: 0 auto;
+  max-width: 500px;
+  border: 1px solid #555;
+  padding: 5rem 1rem;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sign-up-form .title {
+  text-align: center;
+}
+
+.sign-up-form .form-field {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sign-up-form .form-field label {
+  width: 70px;
+}
+
+.sign-up-form .form-field input {
+  flex: 1;
+}
+
+/* header */
+header {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1rem 0;
+  gap: 2rem;
+}
+
+header .nav {
+  flex: 1;
+}
+
+header .nav-list {
+  list-style-type: none;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  height: 100%;
+}
+
+/* folders */
+.folders-container {
+  border: 1px solid #444;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.folders-container .folders-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 20px;
+
+  justify-content: space-between;
+}
+
+/* folders list */
+.folders-list {
+  list-style: none;
+  padding: 0;
+}
+
+.folders-list-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.folders-list-item .left {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+}
+
+.folders-list-item .folder-icon {
+  width: 20px;
+}
+
+/* Add folder form */
+.add-folder-form,
+.add-folder-form .form-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-folder-form button {
+  padding: 5px 10px;
+}
+
+/* Upload file form */
+.upload-file-form {
+  display: flex;
+  align-items: center;
+}
+
+.upload-file-form .form-field {
+}
+
+.upload-file-form button {
+  padding: 5px 10px;
 }
