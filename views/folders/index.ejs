@@ -15,7 +15,7 @@
 
   <!-- Folder List -->
   <ul class="folders-list">
-    <% if(folders.length === 0) {%>
+    <% if(folders.length === 0 && files.length === 0) {%>
     <div><strong>This folder is empty!</strong></div>
     <% } %> <% folders.forEach((folder) => { %>
     <li class="folders-list-item">
