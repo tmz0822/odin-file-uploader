@@ -30,7 +30,7 @@ const uploadFile = [
     const currentTimestamp = Date.now();
     const filePath = `${currentTimestamp}-${req.file.originalname}`;
 
-    const data = await supabase.uploadFile(filePath, fileBuffer, req.file);
+    await supabase.uploadFile(filePath, fileBuffer, req.file);
 
     // Remove temporary file in uploads folder
     await fs.unlink(req.file.path);
@@ -40,8 +40,9 @@ const uploadFile = [
       name: req.file.originalname,
       size: req.file.size,
       uploadTime: new Date(currentTimestamp).toISOString(),
-      fileUrl: 'test',
+      fileUrl: filePath,
     };
+    // todo get file url download link
 
     const folderId = req.params.folderId;
     const userId = req.user.id;
@@ -69,15 +70,12 @@ async function downloadFile(req, res) {
   const userId = req.user.id;
   const file = await db.getFileById(fileId, userId);
   const fileName = file.name;
-  const fileUploadTime = new Date(file.uploadTime).getTime();
-  const filePath = path.resolve('uploads', `${fileUploadTime}-${fileName}`);
 
-  res.download(filePath, fileName, (err) => {
-    if (err) {
-      console.error('File download error:', err);
-      res.status(500).send('Error downloading file');
-    }
-  });
+  const data = await supabase.downloadFile(file.fileUrl);
+
+  res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+  res.setHeader('Content-Type', data.type);
+  res.send(Buffer.from(await data.arrayBuffer()));
 }
 
 async function deleteFile(req, res) {

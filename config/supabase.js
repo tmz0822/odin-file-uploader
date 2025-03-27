@@ -19,4 +19,17 @@ async function uploadFile(filePath, fileBuffer, file) {
   }
 }
 
-module.exports = { uploadFile };
+async function downloadFile(filePath) {
+  const { data, error } = await supabase.storage
+    .from('odin-file-uploader')
+    .download(filePath);
+
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(data);
+    return data;
+  }
+}
+
+module.exports = { uploadFile, downloadFile };
