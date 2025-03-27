@@ -11,7 +11,9 @@ filesRouter.get('/:id', filesController.getFile);
 
 filesRouter.get('/:id/download', filesController.downloadFile);
 
-filesRouter.post('/', filesController.uploadFile); // Upload file
+filesRouter.post('/', filesController.uploadFile);
 filesRouter.post('/:folderId', filesController.uploadFile);
+
+filesRouter.post('/:id/delete', filesController.deleteFile);
 
 module.exports = filesRouter;

@@ -7,6 +7,7 @@ async function addFile(file, userId, folderId = null) {
       name: file.name,
       size: file.size,
       uploadTime: file.uploadTime,
+      fileUrl: file.fileUrl,
       user: { connect: { id: userId } },
       folder: folderId ? { connect: { id: folderId } } : undefined,
     },
@@ -60,4 +61,26 @@ async function getFileById(fileId, userId) {
   }
 }
 
-module.exports = { addFile, getRootFolderFiles, getFiles, getFileById };
+async function deleteFile(fileId, userId) {
+  try {
+    return await prisma.file.delete({
+      where: {
+        id: fileId,
+        userId: userId,
+      },
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      throw new Error('File not found or unauthorized');
+    }
+    throw new Error('Database error');
+  }
+}
+
+module.exports = {
+  addFile,
+  getRootFolderFiles,
+  getFiles,
+  getFileById,
+  deleteFile,
+};
